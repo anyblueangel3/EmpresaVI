@@ -8,6 +8,8 @@ package dao;
 import model.Clientes;
 import empresavi.BD;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -121,6 +123,35 @@ public class CliDAO {
         
         return men;
         
+    }
+    
+    public ArrayList<Clientes> listarClientes() {
+        ArrayList<Clientes> listaClientes = new ArrayList<>();
+        sql = "SELECT * FROM clientes ORDER BY nome_razao;";
+        try {
+            statement = bd.connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                this.cliente = new Clientes();
+                this.cliente.setId_cgc_cpf(resultSet.getString(1));
+                this.cliente.setFisica_juridica(resultSet.getString(2));
+                this.cliente.setNome_razao(resultSet.getString(3));
+                this.cliente.setEmail(resultSet.getString(4));
+                this.cliente.setTelefone(resultSet.getString(5));
+                this.cliente.setCep(resultSet.getString(6));
+                this.cliente.setEndereco(resultSet.getString(7));
+                this.cliente.setNumero(resultSet.getString(8));
+                this.cliente.setComplemento(resultSet.getString(9));
+                this.cliente.setBairro(resultSet.getString(10));
+                this.cliente.setCidade(resultSet.getString(11));
+                this.cliente.setEstado(resultSet.getString(12));
+                this.cliente.setData_cadastro("" + resultSet.getString(13));
+                listaClientes.add(cliente);
+            }                 
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo!\n" + e);
+        }
+        return listaClientes;
     }
     
 }

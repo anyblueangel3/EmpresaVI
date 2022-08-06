@@ -1,5 +1,6 @@
 package empresavi;
 
+import imprime.ImprimeClientes;
 import view.GuiCadastroCategorias;
 import view.GuiCadastroClientes;
 import view.GuiCadastroEndEntCli;
@@ -248,7 +249,15 @@ public class GuiMenuPrincipal extends JFrame {
            }
         });
         
-        
+        miRelatorioClientes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ImprimeClientes label = new ImprimeClientes();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
         
     }
     
