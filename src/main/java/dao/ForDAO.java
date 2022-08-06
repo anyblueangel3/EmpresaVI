@@ -3,6 +3,8 @@ package dao;
 import model.Fornecedores;
 import empresavi.BD;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -115,6 +117,35 @@ public class ForDAO {
         
         return men;
         
+    }
+    
+    public ArrayList<Fornecedores> listarFornecedores() {
+        ArrayList<Fornecedores> listaFornecedores = new ArrayList<>();
+        sql = "SELECT * FROM fornecedores ORDER BY nome_razao;";
+        try {
+            statement = bd.connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                this.fornecedor = new Fornecedores();
+                this.fornecedor.setId_cgc_cpf(resultSet.getString(1));
+                this.fornecedor.setFisica_juridica(resultSet.getString(2));
+                this.fornecedor.setNome_razao(resultSet.getString(3));
+                this.fornecedor.setEmail(resultSet.getString(4));
+                this.fornecedor.setTelefone(resultSet.getString(5));
+                this.fornecedor.setCep(resultSet.getString(6));
+                this.fornecedor.setEndereco(resultSet.getString(7));
+                this.fornecedor.setNumero(resultSet.getString(8));
+                this.fornecedor.setComplemento(resultSet.getString(9));
+                this.fornecedor.setBairro(resultSet.getString(10));
+                this.fornecedor.setCidade(resultSet.getString(11));
+                this.fornecedor.setEstado(resultSet.getString(12));
+                this.fornecedor.setData_cadastro("" + resultSet.getString(13));
+                listaFornecedores.add(fornecedor);
+            }                 
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo!\n" + e);
+        }
+        return listaFornecedores;
     }
     
 }
