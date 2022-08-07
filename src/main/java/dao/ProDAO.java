@@ -3,6 +3,8 @@ package dao;
 import model.Produtos;
 import empresavi.BD;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -94,6 +96,30 @@ public class ProDAO {
         
         return men;
         
+    }
+    
+    public ArrayList<Produtos> listarProdutos() {
+        ArrayList<Produtos> listaProdutos = new ArrayList<>();
+        sql = "SELECT * FROM produtos ORDER BY descricao;";
+        try {
+            statement = bd.connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                this.produto = new Produtos();
+                this.produto.setId(resultSet.getString(1));
+                this.produto.setDescricao(resultSet.getString(2));
+                this.produto.setCategoria(resultSet.getString(3));
+                this.produto.setQuantidade(Double.parseDouble(resultSet.getString(4)));
+                this.produto.setUnidade(resultSet.getString(5));
+                this.produto.setPreco_venda(Double.parseDouble(resultSet.getString(6)));
+                this.produto.setPreco_ultima_compra(Double.parseDouble(resultSet.getString(7)));
+                this.produto.setData_cadastro(resultSet.getString(8));                
+                listaProdutos.add(produto);
+            }                 
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo!\n" + e);
+        }
+        return listaProdutos;
     }
     
 }

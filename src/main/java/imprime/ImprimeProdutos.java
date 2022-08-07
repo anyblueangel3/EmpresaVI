@@ -6,10 +6,8 @@ import com.lowagie.text.HeaderFooter;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfWriter;
-import dao.CliDAO;
-import dao.ForDAO;
+import dao.ProDAO;
 import empresavi.BD;
 import empresavi.GuiMenuPrincipal;
 import java.awt.Font;
@@ -21,32 +19,30 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.Clientes;
-import model.Fornecedores;
+import model.Produtos;
 
 /**
  *
  * @author Ronaldo Rodrigues Godoi
  */
-public class ImprimeFornecedores extends JPanel {
-
-    ForDAO fornecedores;
+public class ImprimeProdutos extends JPanel {
+    
+    ProDAO produtos;
+    Produtos produto;
+    ArrayList<Produtos> listaProdutos = new ArrayList<>();
     JLabel lbTituloTela, lbImprimindo;
     JButton btImprimir, btSair;
-    Fornecedores fornecedor;
-    ArrayList<Fornecedores> listaFornecedores = new ArrayList<>();
     Document documentPDF = new Document(PageSize.A4, 25, 25, 50, 50);
-
-    public ImprimeFornecedores() {
+    
+    public ImprimeProdutos() {
         inicializarComponentes();
         definirEventos();
     }
-
-    public void inicializarComponentes() {
-
+    
+    private void inicializarComponentes() {
         setLayout(null);
 
-        lbTituloTela = new JLabel(" Impressão da lista de Fornecedores ");
+        lbTituloTela = new JLabel(" Impressão da lista de Produtos ");
         Font font = new Font("San Serif", Font.PLAIN, 24);
         lbTituloTela.setFont(font);
         lbTituloTela.setBounds(300, 150, 400, 50);
@@ -54,7 +50,7 @@ public class ImprimeFornecedores extends JPanel {
         lbImprimindo = new JLabel("");
         lbImprimindo.setBounds(350, 350, 200, 25);
 
-        btImprimir = new JButton(" Imprimir Relatório de Fornecedores ");
+        btImprimir = new JButton(" Imprimir Relatório de Produtos ");
         btImprimir.setBounds(340, 520, 260, 25);
 
         btSair = new JButton(" Sair ");
@@ -65,14 +61,14 @@ public class ImprimeFornecedores extends JPanel {
         add(btImprimir);
         add(btSair);
 
-        fornecedores = new ForDAO();
+        produtos = new ProDAO();
     }
-
-    public void definirEventos() {
+    
+    private void definirEventos() {
 
         btImprimir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                imprimirRelatorioFornecedores();
+                imprimirRelatorioProdutos();
             }
         });
 
@@ -83,31 +79,32 @@ public class ImprimeFornecedores extends JPanel {
                 setVisible(false);
             }
         });
-
+        
     }
-
-    public void imprimirRelatorioFornecedores() {
-        listaFornecedores = new ArrayList<>();
-        listaFornecedores = fornecedores.listarFornecedores();
-        if (listaFornecedores == null) {
+    
+        public void imprimirRelatorioProdutos() {
+        listaProdutos = new ArrayList<>();
+        listaProdutos = produtos.listarProdutos();
+        if (listaProdutos == null) {
             JOptionPane.showMessageDialog(null, "Cadastro de Fornecedores está vazio!");
             return;
         }
         try {
-            PdfWriter.getInstance(documentPDF, new FileOutputStream("ListaFornecedores.pdf"));
+            PdfWriter.getInstance(documentPDF, new FileOutputStream("ListaProdutos.pdf"));
             adicionarPaginacao();
             documentPDF.open();
             geraCabecalho();
-            for (int i = 0; i < listaFornecedores.size(); i++) {
-                Paragraph fornecedorAtual = new Paragraph("CGC ou CPF: " + listaFornecedores.get(i).getId_cgc_cpf()
-                        + " Nome ou razão social: " + listaFornecedores.get(i).getNome_razao() + "\n"
-                        + "Endereço: " + listaFornecedores.get(i).getEndereco()
-                        + " Número: " + listaFornecedores.get(i).getNumero()
-                        + " Cidade: " + listaFornecedores.get(i).getCidade());
-                documentPDF.add(fornecedorAtual);
+            for (int i = 0; i < listaProdutos.size(); i++) {
+                Paragraph produtoAtual = new Paragraph("Id Produto: " + listaProdutos.get(i).getId()
+                        + " Descrição: " + listaProdutos.get(i).getDescricao() + "\n"
+                        + "Data de cadastro: " + listaProdutos.get(i).getData_cadastro()
+                        + " Preço última compra: " + listaProdutos.get(i).getPreco_ultima_compra()
+                        + "\n Quantidade em Estoque: " + listaProdutos.get(i).getQuantidade() 
+                        + " Preço de venda: " + listaProdutos.get(i).getPreco_venda());
+                documentPDF.add(produtoAtual);
                 documentPDF.add(new Paragraph(" "));
                 lbImprimindo.setText("Imprimindo registro: " + i);
-                if((i+1)%12 == 0 && (listaFornecedores.size()-1) != i) {
+                if((i+1)%9 == 0 && (listaProdutos.size()-1) != i) {
                     documentPDF.newPage();
                     geraCabecalho();
                 }
@@ -116,14 +113,12 @@ public class ImprimeFornecedores extends JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório de Fornecedores!\n" + e);
         }
-
         documentPDF.close();
-
     }
-
+        
     private void geraCabecalho() {
         Paragraph cabecalho = new Paragraph(
-                "Relatório de Fornecedores\n"
+                "Relatório de Produtos\n"
                 + "_______________________________________________________________");
         cabecalho.setAlignment(Element.ALIGN_CENTER);
         documentPDF.add(cabecalho);
