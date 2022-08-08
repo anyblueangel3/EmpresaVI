@@ -3,6 +3,8 @@ package dao;
 import model.Unidades;
 import empresavi.BD;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -73,6 +75,25 @@ public class UnidadesDAO {
         
         return men;
         
+    }
+    
+    public ArrayList<Unidades> listarUnidades() {
+        ArrayList<Unidades> listaUnidades = new ArrayList<>();
+        sql = "SELECT * FROM unidades ORDER BY descricao;";
+        try {
+            statement = bd.connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                this.unidade = new Unidades();
+                this.unidade.setId(resultSet.getString(1));
+                this.unidade.setDescricao(resultSet.getString(2));
+                this.unidade.setData_cadastro(resultSet.getString(3));
+                listaUnidades.add(unidade);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo!\n" + e);
+        }
+        return listaUnidades;
     }
     
 }
