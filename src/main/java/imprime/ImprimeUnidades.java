@@ -103,7 +103,7 @@ public class ImprimeUnidades extends JPanel {
                 documentPDF.add(unidadeAtual);
                 documentPDF.add(new Paragraph(" "));
                 lbImprimindo.setText("Imprimindo registro: " + i);
-                if((i+1)%24 == 0 && (listaUnidades.size()-1) != i) {
+                if((i+1)%18 == 0 && (listaUnidades.size()-1) != i) {
                     documentPDF.newPage();
                     geraCabecalho();
                 }

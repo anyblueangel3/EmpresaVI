@@ -1,5 +1,7 @@
 package empresavi;
 
+import consulta.ConsultaClientes;
+import consulta.ConsultaFornecedores;
 import imprime.ImprimeCategorias;
 import imprime.ImprimeClientes;
 import imprime.ImprimeFornecedores;
@@ -297,6 +299,26 @@ public class GuiMenuPrincipal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 bloqueiaMenu();
                 ImprimeUnidades label = new ImprimeUnidades();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
+ 
+        miConsultaClientes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ConsultaClientes label = new ConsultaClientes();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
+        
+        miConsultaFornecedor.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ConsultaFornecedores label = new ConsultaFornecedores();
                 contentPane.removeAll();
                 contentPane.add(label);
                 contentPane.validate();

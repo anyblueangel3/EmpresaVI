@@ -103,7 +103,7 @@ public class ImprimeCategorias extends JPanel {
                 documentPDF.add(categoriaAtual);
                 documentPDF.add(new Paragraph(" "));
                 lbImprimindo.setText("Imprimindo registro: " + i);
-                if((i+1)%24 == 0 && (listaCategorias.size()-1) != i) {
+                if((i+1)%18 == 0 && (listaCategorias.size()-1) != i) {
                     documentPDF.newPage();
                     geraCabecalho();
                 }
