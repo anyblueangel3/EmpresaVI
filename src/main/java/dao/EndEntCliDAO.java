@@ -3,6 +3,9 @@ package dao;
 import model.Cli_entregas;
 import empresavi.BD;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.Cli_entregasEstendida;
 
 /**
  *
@@ -11,6 +14,7 @@ import java.sql.*;
 public class EndEntCliDAO {
     
     public Cli_entregas cli_entrega;
+    public Cli_entregasEstendida cli_entrega2;
     public BD bd;
     private PreparedStatement statement;
     private ResultSet resultSet;
@@ -104,9 +108,46 @@ public class EndEntCliDAO {
         return men;
         
     }
-    
-}
 
+    public ArrayList<Cli_entregasEstendida> listarEnderecosEntregaClientes() {
+        ArrayList<Cli_entregasEstendida> listaEnderecosEntregaClientes = new ArrayList<>();
+        sql = "SELECT e.id, "
+                + "e.id_cliente, "
+                + "e.telefone, "
+                + "e.cep, "
+                + "e.endereco, "
+                + "e.numero, "
+                + "e.complemento, "
+                + "e.bairro, "
+                + "e.cidade, "
+                + "e.estado, "
+                + "c.nome_razao "
+                + "FROM cli_entrega as e JOIN clientes as c "
+                + "ON e.id_cliente = c.id_cgc_cpf ORDER BY c.nome_razao;";
+        try {
+            statement = bd.connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                this.cli_entrega2 = new Cli_entregasEstendida();
+                this.cli_entrega2.setId(resultSet.getString(1));
+                this.cli_entrega2.setId_cliente(resultSet.getString(2));
+                this.cli_entrega2.setTelefone(resultSet.getString(3));
+                this.cli_entrega2.setCep(resultSet.getString(4));
+                this.cli_entrega2.setEndereco(resultSet.getString(5));
+                this.cli_entrega2.setNumero(resultSet.getString(6));
+                this.cli_entrega2.setComplemento(resultSet.getString(7));
+                this.cli_entrega2.setBairro(resultSet.getString(8));
+                this.cli_entrega2.setCidade(resultSet.getString(9));
+                this.cli_entrega2.setEstado(resultSet.getString(10));
+                this.cli_entrega2.setNome_razao(resultSet.getString(11));
+                listaEnderecosEntregaClientes.add(this.cli_entrega2);
+            }                 
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo!\n" + e);
+        }
+        return listaEnderecosEntregaClientes;
+    }
+}
 /*
 Table: cli_entrega
 Columns:

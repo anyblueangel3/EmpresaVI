@@ -3,6 +3,9 @@ package dao;
 import model.For_entregas;
 import empresavi.BD;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.For_entregasEstendida;
 
 /**
  *
@@ -11,6 +14,7 @@ import java.sql.*;
 public class EndEntForDAO {
     
     public For_entregas for_entrega;
+    public For_entregasEstendida for_entrega2;
     public BD bd;
     private PreparedStatement statement;
     private ResultSet resultSet;
@@ -100,6 +104,45 @@ public class EndEntForDAO {
         
         return men;
         
+    }
+    
+    public ArrayList<For_entregasEstendida> listarEnderecosEntregaFornecedores() {
+        ArrayList<For_entregasEstendida> listaEnderecosEntregaFornecedores = new ArrayList<>();
+        sql = "SELECT e.id, "
+                + "e.id_fornecedor, "
+                + "e.telefone, "
+                + "e.cep, "
+                + "e.endereco, "
+                + "e.numero, "
+                + "e.complemento, "
+                + "e.bairro, "
+                + "e.cidade, "
+                + "e.estado, "
+                + "f.nome_razao "
+                + "FROM for_entrega as e JOIN fornecedores as f "
+                + "ON e.id_fornecedor = f.id_cgc_cpf ORDER BY f.nome_razao;";
+        try {
+            statement = bd.connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                this.for_entrega2 = new For_entregasEstendida();
+                this.for_entrega2.setId(resultSet.getString(1));
+                this.for_entrega2.setId_fornecedor(resultSet.getString(2));
+                this.for_entrega2.setTelefone(resultSet.getString(3));
+                this.for_entrega2.setCep(resultSet.getString(4));
+                this.for_entrega2.setEndereco(resultSet.getString(5));
+                this.for_entrega2.setNumero(resultSet.getString(6));
+                this.for_entrega2.setComplemento(resultSet.getString(7));
+                this.for_entrega2.setBairro(resultSet.getString(8));
+                this.for_entrega2.setCidade(resultSet.getString(9));
+                this.for_entrega2.setEstado(resultSet.getString(10));
+                this.for_entrega2.setNome_razao(resultSet.getString(11));
+                listaEnderecosEntregaFornecedores.add(this.for_entrega2);
+            }                 
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo!\n" + e);
+        }
+        return listaEnderecosEntregaFornecedores;
     }
     
 }

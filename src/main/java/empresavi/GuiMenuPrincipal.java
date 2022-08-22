@@ -1,7 +1,11 @@
 package empresavi;
 
+import consulta.ConsultaCategorias;
 import consulta.ConsultaClientes;
+import consulta.ConsultaEnderecoEntregaCliente;
+import consulta.ConsultaEnderecoEntregaFornecedor;
 import consulta.ConsultaFornecedores;
+import consulta.ConsultaProdutos;
 import imprime.ImprimeCategorias;
 import imprime.ImprimeClientes;
 import imprime.ImprimeFornecedores;
@@ -319,6 +323,46 @@ public class GuiMenuPrincipal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 bloqueiaMenu();
                 ConsultaFornecedores label = new ConsultaFornecedores();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
+        
+        miConsultaProdutos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ConsultaProdutos label = new ConsultaProdutos();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
+        
+        miConsultaCategorias.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ConsultaCategorias label = new ConsultaCategorias();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
+        
+        miConsultaEndEntregaCli.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ConsultaEnderecoEntregaCliente label = new ConsultaEnderecoEntregaCliente();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
+        
+        miConsultaEndEntregaFor.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ConsultaEnderecoEntregaFornecedor label = new ConsultaEnderecoEntregaFornecedor();
                 contentPane.removeAll();
                 contentPane.add(label);
                 contentPane.validate();

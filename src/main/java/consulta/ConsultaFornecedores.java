@@ -73,7 +73,7 @@ public class ConsultaFornecedores extends JPanel {
         tabelaFornecedores.getColumnModel().getColumn(3).setPreferredWidth(25);
 
         tabelaFornecedores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        DefaultTableModel dtmClientes = (DefaultTableModel) tabelaFornecedores.getModel();
+        DefaultTableModel dtmFornecedores = (DefaultTableModel) tabelaFornecedores.getModel();
         int cont = listaFornecedores.size();
         
         for(int i = 0; i < cont; i++) {
@@ -82,7 +82,7 @@ public class ConsultaFornecedores extends JPanel {
             dados[1] = listaFornecedores.get(i).getNome_razao();
             dados[2] = listaFornecedores.get(i).getCidade();
             dados[3] = listaFornecedores.get(i).getTelefone();
-            dtmClientes.addRow(dados);
+            dtmFornecedores.addRow(dados);
         }
         scrollFornecedores.setViewportView(tabelaFornecedores);
         
