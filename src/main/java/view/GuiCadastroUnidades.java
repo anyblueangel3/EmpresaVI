@@ -48,6 +48,8 @@ public class GuiCadastroUnidades extends JPanel {
         //int largura = 1800;
                 
         lbCad_unidades = new JLabel("Cadastro de Unidades de compra e venda");
+        Font font = new Font("San Serif", Font.PLAIN, 24);
+        lbCad_unidades.setFont(font);
         
         lbId = new JLabel("Código da unidade: ");
         lbDescricao = new JLabel("Descrição: ");
@@ -72,7 +74,7 @@ public class GuiCadastroUnidades extends JPanel {
         btSair = new JButton(null, new ImageIcon("c:/icones/icon12/sair.png"));
         btSair.setToolTipText("Sair");
         
-        lbCad_unidades.setBounds(35, 75, 250, 25);
+        lbCad_unidades.setBounds(200, 75, 500, 50);
         
         lbId.setBounds(35, 175, 150, 25);
         tfId.setBounds(200, 175, 100, 25);

@@ -4,6 +4,7 @@ import dao.ForDAO;
 import empresavi.BD;
 import empresavi.GuiMenuPrincipal;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,6 +67,8 @@ public class GuiCadastroFornecedores extends JPanel {
         //setBounds(0, 0, largura, altura);
         
         lbCad_for = new JLabel("Cadastro de Fornecedores");
+        Font font = new Font("San Serif", Font.PLAIN, 24);
+        lbCad_for.setFont(font);
         
         cbFisJur = new JComboBox(cbFisJurItem);
         cbEstado = new JComboBox(cbEstadoItem);
@@ -115,7 +118,7 @@ public class GuiCadastroFornecedores extends JPanel {
         btSair = new JButton(null, new ImageIcon("c:/icones/icon12/sair.png"));
         btSair.setToolTipText("Sair");
         
-        lbCad_for.setBounds(35, 75, 250, 25);
+        lbCad_for.setBounds(300, 75, 500, 50);
         lbId_cgc_cpf.setBounds(35, 175, 100, 25);
         tfId_cgc_cpf.setBounds(115, 175, 150, 25);
         lbFisica_juridica.setBounds(280, 175, 160, 25);

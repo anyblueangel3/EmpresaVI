@@ -47,7 +47,9 @@ public class GuiCadastroCategorias extends JPanel {
         //int altura = 1000;
         //int largura = 1800;
                 
-        lbCad_categorias = new JLabel("Cadastro de Categorias");
+        lbCad_categorias = new JLabel("Cadastro de Categorias de Produto");
+        Font font = new Font("San Serif", Font.PLAIN, 24);
+        lbCad_categorias.setFont(font);
         
         lbId = new JLabel("Código da Categoria: ");
         lbDescricao = new JLabel("Descrição: ");
@@ -72,7 +74,7 @@ public class GuiCadastroCategorias extends JPanel {
         btSair = new JButton(null, new ImageIcon("c:/icones/icon12/sair.png"));
         btSair.setToolTipText("Sair");
         
-        lbCad_categorias.setBounds(35, 75, 150, 25);
+        lbCad_categorias.setBounds(300, 75, 500, 50);
         
         lbId.setBounds(35, 175, 150, 25);
         tfId.setBounds(200, 175, 100, 25);

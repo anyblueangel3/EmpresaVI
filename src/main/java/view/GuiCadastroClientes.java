@@ -3,6 +3,7 @@ package view;
 import dao.CliDAO;
 import empresavi.BD;
 import empresavi.GuiMenuPrincipal;
+import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.DateFormat;
@@ -63,6 +64,8 @@ public class GuiCadastroClientes extends JPanel{
         //setBounds(0, 0, largura, altura);
         
         lbCad_cli = new JLabel("Cadastro de Clientes");
+        Font font = new Font("San Serif", Font.PLAIN, 24);
+        lbCad_cli.setFont(font);
                 
         cbFisJur = new JComboBox(cbFisJurItem);
         cbEstado = new JComboBox(cbEstadoItem);
@@ -112,7 +115,7 @@ public class GuiCadastroClientes extends JPanel{
         btSair = new JButton(null, new ImageIcon("c:/icones/icon12/sair.png"));
         btSair.setToolTipText("Sair");
         
-        lbCad_cli.setBounds(35, 75, 150, 25);
+        lbCad_cli.setBounds(300, 75, 300, 50);
         lbId_cgc_cpf.setBounds(35, 175, 100, 25);
         tfId_cgc_cpf.setBounds(115, 175, 150, 25);
         lbFisica_juridica.setBounds(280, 175, 160, 25);

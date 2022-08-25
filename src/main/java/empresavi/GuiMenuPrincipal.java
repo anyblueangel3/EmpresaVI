@@ -8,6 +8,8 @@ import consulta.ConsultaFornecedores;
 import consulta.ConsultaProdutos;
 import imprime.ImprimeCategorias;
 import imprime.ImprimeClientes;
+import imprime.ImprimeEndEntCli;
+import imprime.ImprimeEndEntFor;
 import imprime.ImprimeFornecedores;
 import imprime.ImprimeProdutos;
 import imprime.ImprimeUnidades;
@@ -39,7 +41,8 @@ public class GuiMenuPrincipal extends JFrame {
             miForProduto, miUnidades, miUsuarios;
     private JMenuItem miPedidoCliente, miPedidoFornecedor;
     private JMenuItem miRelatorioClientes, miRelatorioFornecedores,
-            miRelatorioProdutos, miRelatorioCategorias, miRelatorioUnidades;
+            miRelatorioProdutos, miRelatorioCategorias, miRelatorioUnidades, 
+            miRelatorioEndEntCli, miRelatorioEndEntFor;
     private JMenuItem miConsultaClientes, miConsultaFornecedor, miConsultaProdutos,
             miConsultaCategorias, miConsultaEndEntregaCli, miConsultaEndEntregaFor;
     Usuarios ausuario = new Usuarios();
@@ -95,6 +98,8 @@ public class GuiMenuPrincipal extends JFrame {
         miRelatorioProdutos = new JMenuItem("Relatório de Produtos");
         miRelatorioCategorias = new JMenuItem("Relatório de Categorias");
         miRelatorioUnidades = new JMenuItem("Relatório de Unidades");
+        miRelatorioEndEntCli = new JMenuItem("Relatório de Endereço de Entrega a Cliente");
+        miRelatorioEndEntFor = new JMenuItem("Relatorio de Endereço de Entrega de Fornecedor");
                 
         //Menu Cadastros
         mnArquivos.add(miClientes);
@@ -126,6 +131,8 @@ public class GuiMenuPrincipal extends JFrame {
         mnRelatorios.add(miRelatorioProdutos);
         mnRelatorios.add(miRelatorioCategorias);
         mnRelatorios.add(miRelatorioUnidades);
+        mnRelatorios.add(miRelatorioEndEntCli);
+        mnRelatorios.add(miRelatorioEndEntFor);
         
         mnBarra.add(mnArquivos);
         mnBarra.add(mnPedidos);
@@ -303,6 +310,26 @@ public class GuiMenuPrincipal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 bloqueiaMenu();
                 ImprimeUnidades label = new ImprimeUnidades();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
+        
+        miRelatorioEndEntCli.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ImprimeEndEntCli label = new ImprimeEndEntCli();
+                contentPane.removeAll();
+                contentPane.add(label);
+                contentPane.validate();
+            }
+        });
+        
+        miRelatorioEndEntFor.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                ImprimeEndEntFor label = new ImprimeEndEntFor();
                 contentPane.removeAll();
                 contentPane.add(label);
                 contentPane.validate();

@@ -3,6 +3,7 @@ package view;
 import dao.UsuariosDAO;
 import empresavi.BD;
 import empresavi.GuiMenuPrincipal;
+import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.DateFormat;
@@ -51,6 +52,8 @@ public class GuiCadastroUsuarios extends JPanel {
         setLayout(null);
         
         lbCadastroUsuarios = new JLabel("Cadastro de Usuários");
+        Font font = new Font("San Serif", Font.PLAIN, 24);
+        lbCadastroUsuarios.setFont(font);
         
         lbId = new JLabel("Identificação: ");
         lbNome = new JLabel("Nome: ");
@@ -98,7 +101,7 @@ public class GuiCadastroUsuarios extends JPanel {
         btSair = new JButton(null, new ImageIcon("c:/icones/icon12/sair.png"));
         btSair.setToolTipText("Sair");
         
-        lbCadastroUsuarios.setBounds(35, 50, 150, 25);
+        lbCadastroUsuarios.setBounds(300, 50, 500, 50);
         lbId.setBounds(35, 125, 100, 25);
         tfId.setBounds(130, 125, 150, 25);
         lbNome.setBounds(480, 125, 170, 25);

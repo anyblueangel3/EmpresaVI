@@ -50,6 +50,8 @@ public class GuiCadastroEndEntFor extends JPanel {
         setLayout(null);
         
         lbCad_end_ent_for = new JLabel("Cadastro de Endereço onde o Fornecedor vai entregar");
+        Font font = new Font("San Serif", Font.PLAIN, 24);
+        lbCad_end_ent_for.setFont(font);
         
         cbEstado = new JComboBox(cbEstadoItem);
         sp2 = new JScrollPane(cbEstado);
@@ -92,7 +94,7 @@ public class GuiCadastroEndEntFor extends JPanel {
         btSair = new JButton(null, new ImageIcon("c:/icones/icon12/sair.png"));
         btSair.setToolTipText("Sair");
         
-        lbCad_end_ent_for.setBounds(35, 75, 300, 25);
+        lbCad_end_ent_for.setBounds(200, 75, 600, 50);
         
         lbId.setBounds(35, 175, 200, 25);
         tfId.setBounds(250, 175, 75, 25);

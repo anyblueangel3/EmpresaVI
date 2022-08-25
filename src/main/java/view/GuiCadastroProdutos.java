@@ -8,6 +8,7 @@ import empresavi.BD;
 import empresavi.GuiMenuPrincipal;
 import empresavi.Util;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -68,6 +69,8 @@ public class GuiCadastroProdutos extends JPanel{
         //int largura = 1800;
                 
         lbCad_pro = new JLabel("Cadastro de Produtos");
+        Font font = new Font("San Serif", Font.PLAIN, 24);
+        lbCad_pro.setFont(font);
         
         lbId = new JLabel("Código do Produto: ");
         lbDescricao = new JLabel("Descrição: ");
@@ -108,7 +111,7 @@ public class GuiCadastroProdutos extends JPanel{
         
         btCadForProduto = new JButton(" Fornecedor deste produto ");
         
-        lbCad_pro.setBounds(35, 75, 150, 25);
+        lbCad_pro.setBounds(300, 75, 500, 50);
         
         lbId.setBounds(35, 175, 150, 25);
         tfId.setBounds(200, 175, 150, 25);
