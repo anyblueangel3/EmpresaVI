@@ -22,6 +22,7 @@ import view.GuiCadastroUnidades;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import manutencao.FazBackup;
 import model.Usuarios;
 import view.GuiCadastroEndEntFor;
 import view.GuiCadastroUsuarios;
@@ -33,9 +34,14 @@ import view.GuiPedidoFornecedor;
  * @author Ronaldo R. Godoi
  */
 public class GuiMenuPrincipal extends JFrame {
+
     private Container contentPane;
+    
     private JMenuBar mnBarra;
-    private static JMenu mnArquivos, mnPedidos, mnConsultas, mnRelatorios;
+
+    private static JMenu mnArquivos, mnPedidos, mnConsultas, mnRelatorios,
+            mnManutencao;
+
     private JMenuItem miSair, miClientes, miFornecedores, miProdutos,
             miCategorias, miEndEntregaCliente, miEndEntregaFornecedor,
             miForProduto, miUnidades, miUsuarios;
@@ -45,6 +51,9 @@ public class GuiMenuPrincipal extends JFrame {
             miRelatorioEndEntCli, miRelatorioEndEntFor;
     private JMenuItem miConsultaClientes, miConsultaFornecedor, miConsultaProdutos,
             miConsultaCategorias, miConsultaEndEntregaCli, miConsultaEndEntregaFor;
+    private JMenuItem miManutencaoCriaBanco, miManutencaoCriaTabelas,
+            miManutencaoFazBackup, miManutencaoRestauraBackup;
+
     Usuarios ausuario = new Usuarios();
         
     public GuiMenuPrincipal(Usuarios ausuario) {
@@ -66,8 +75,10 @@ public class GuiMenuPrincipal extends JFrame {
         mnConsultas.setMnemonic('C');
         mnRelatorios = new JMenu("Relatórios");
         mnRelatorios.setMnemonic('R');
+        mnManutencao = new JMenu("Manutenção");
+        mnManutencao.setMnemonic('M');
         
-        // Arquivos ou Cadastros
+        // Cria itens do menu Arquivos ou Cadastros
         miClientes = new JMenuItem("Cadastro de Clientes");
         miFornecedores = new JMenuItem("Cadastro de Fornecedores");
         miProdutos = new JMenuItem("Cadastro de Produtos");
@@ -80,11 +91,11 @@ public class GuiMenuPrincipal extends JFrame {
         miSair = new JMenuItem("Sair", new ImageIcon("c:/icones/sair2.jpg"));
         miSair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.ALT_MASK));
         
-        // Pedidos
+        // Cria itens do menu Pedidos
         miPedidoCliente = new JMenuItem("Pedidos de Clientes");
         miPedidoFornecedor = new JMenuItem("Pedidos para Fornecedor");
         
-        // Consultas
+        // Cria itens do menu Consultas
         miConsultaClientes = new JMenuItem("Consulta Clientes");
         miConsultaFornecedor = new JMenuItem("Consulta Fornecedor");
         miConsultaProdutos = new JMenuItem("Consulta Produtos");
@@ -92,7 +103,7 @@ public class GuiMenuPrincipal extends JFrame {
         miConsultaEndEntregaCli = new JMenuItem("Consulta Endereço de Entrega de Cliente");
         miConsultaEndEntregaFor = new JMenuItem("Consulta Endereço em que o Fornecedor vai entregar");
         
-        // Relatórios
+        // Cria itens do menu Relatórios
         miRelatorioClientes = new JMenuItem("Relatório de Clientes");
         miRelatorioFornecedores = new JMenuItem("Relatório de Fornecedores");
         miRelatorioProdutos = new JMenuItem("Relatório de Produtos");
@@ -100,24 +111,31 @@ public class GuiMenuPrincipal extends JFrame {
         miRelatorioUnidades = new JMenuItem("Relatório de Unidades");
         miRelatorioEndEntCli = new JMenuItem("Relatório de Endereço de Entrega a Cliente");
         miRelatorioEndEntFor = new JMenuItem("Relatorio de Endereço de Entrega de Fornecedor");
-                
-        //Menu Cadastros
+        
+        // Cria itens do menu Manutenção
+        miManutencaoCriaBanco = new JMenuItem("Cria o Banco de Dados");
+        miManutencaoCriaTabelas = new JMenuItem("Cria as Tabelas");
+        miManutencaoFazBackup = new JMenuItem("Faz Backup do Sistema");
+        miManutencaoRestauraBackup = new JMenuItem("Restaura Backup");
+        
+        // Adiciona os itens ao Menu Cadastros
         mnArquivos.add(miClientes);
         mnArquivos.add(miFornecedores);
         mnArquivos.add(miProdutos);
         mnArquivos.add(miCategorias);
         mnArquivos.add(miEndEntregaCliente);
         mnArquivos.add(miEndEntregaFornecedor);
+
         //mnArquivos.add(miForProduto);
         mnArquivos.add(miUnidades);
         mnArquivos.add(miUsuarios);
         mnArquivos.add(miSair);
         
-        //Menu Pedidos
+        // Adiciona os itens ao Menu Pedidos
         mnPedidos.add(miPedidoCliente);
         mnPedidos.add(miPedidoFornecedor);
         
-        //Menu Consultas
+        // Adiciona os itens ao Menu Consultas
         mnConsultas.add(miConsultaClientes);
         mnConsultas.add(miConsultaFornecedor);
         mnConsultas.add(miConsultaProdutos);
@@ -125,7 +143,7 @@ public class GuiMenuPrincipal extends JFrame {
         mnConsultas.add(miConsultaEndEntregaCli);
         mnConsultas.add(miConsultaEndEntregaFor);
         
-        //Menu Relatórios
+        // Adiciona os itens ao Menu Relatórios
         mnRelatorios.add(miRelatorioClientes);
         mnRelatorios.add(miRelatorioFornecedores);
         mnRelatorios.add(miRelatorioProdutos);
@@ -133,11 +151,19 @@ public class GuiMenuPrincipal extends JFrame {
         mnRelatorios.add(miRelatorioUnidades);
         mnRelatorios.add(miRelatorioEndEntCli);
         mnRelatorios.add(miRelatorioEndEntFor);
+
+        // Adiciona os itens ao Menu Manutenção
+        mnManutencao.add(miManutencaoCriaBanco);
+        mnManutencao.add(miManutencaoCriaTabelas);
+        mnManutencao.add(miManutencaoFazBackup);
+        mnManutencao.add(miManutencaoRestauraBackup);
         
         mnBarra.add(mnArquivos);
         mnBarra.add(mnPedidos);
         mnBarra.add(mnConsultas);
         mnBarra.add(mnRelatorios);
+        mnBarra.add(mnManutencao);
+
         setJMenuBar(mnBarra);
         liberaMenu();
         travaUsuario(ausuario);
@@ -396,6 +422,15 @@ public class GuiMenuPrincipal extends JFrame {
             }
         });
         
+        miManutencaoFazBackup.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bloqueiaMenu();
+                FazBackup fazBackup = new FazBackup();
+                fazBackup.fazerBackup();
+                liberaMenu();
+            }
+        });
+        
     }
     
     private void bloqueiaMenu() {
@@ -403,6 +438,7 @@ public class GuiMenuPrincipal extends JFrame {
         mnPedidos.setEnabled(false);
         mnConsultas.setEnabled(false);
         mnRelatorios.setEnabled(false);
+        mnManutencao.setEnabled(false);
     }
     
     public static void liberaMenu() {
@@ -410,6 +446,7 @@ public class GuiMenuPrincipal extends JFrame {
         mnPedidos.setEnabled(true);
         mnConsultas.setEnabled(true);
         mnRelatorios.setEnabled(true);
+        mnManutencao.setEnabled(true);
     }
         
     public static void abrir(Usuarios ausuario) {

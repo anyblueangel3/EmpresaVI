@@ -34,13 +34,13 @@ public class EmpresaVI extends JFrame {
         setTitle("Login no Sistema");
         setBounds(0, 0, 400, 200);
         setLayout(null);
-        tfLogin = new JTextField(5);
+        tfLogin = new JTextField(160);
         pfSenha = new JPasswordField(5);
         lbSenha = new JLabel("Senha: ");
         lbLogin = new JLabel("Login: ");
         btLogar = new JButton("Logar");
         btCancelar = new JButton("Cancelar");
-        tfLogin.setBounds(100, 30, 120, 25);
+        tfLogin.setBounds(100, 30, 260, 25);
         lbLogin.setBounds(30, 30, 80, 25);
         lbSenha.setBounds(30, 75, 80, 25);
         pfSenha.setBounds(100, 75, 120, 25);
